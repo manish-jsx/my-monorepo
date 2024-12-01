@@ -1,0 +1,101 @@
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  max-width: 1200px; /* Ideal width for large screens */
+  width: 100%; /* Flexible width for smaller screens */
+  background-image: linear-gradient(
+    -60deg,
+    var(--mantine-color-blue-4) 0%,
+    var(--mantine-color-blue-7) 100%
+  );
+  padding: calc(var(--mantine-spacing-xl) * 1.5);
+  border-radius: var(--mantine-radius-md);
+
+  /* Responsive adjustment */
+  flex-wrap: wrap; /* Ensures proper wrapping for smaller screens */
+
+  @media (max-width: 768px) {
+    flex-direction: column; /* Stacks children vertically */
+    padding: var(--mantine-spacing-md); /* Reduce padding */
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--mantine-spacing-sm); /* Further reduce padding for very small screens */
+  }
+}
+
+.title {
+  color: var(--mantine-color-white);
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: var(--mantine-font-size-md);
+
+  @media (max-width: 768px) {
+    font-size: var(--mantine-font-size-sm); /* Reduce size for tablets */
+  }
+
+  @media (max-width: 480px) {
+    font-size: var(--mantine-font-size-xs); /* Further reduce size for mobile screens */
+  }
+}
+
+.count {
+  color: var(--mantine-color-white);
+  font-size: 32px;
+  line-height: 1;
+  font-weight: 700;
+  margin-bottom: var(--mantine-spacing-md);
+  font-family:
+    'Greycliff CF',
+    var(--mantine-font-family);
+
+  @media (max-width: 768px) {
+    font-size: 28px; /* Adjust font size for tablets */
+  }
+
+  @media (max-width: 480px) {
+    font-size: 24px; /* Adjust font size for mobile screens */
+  }
+}
+
+.description {
+  color: var(--mantine-color-blue-0);
+  font-size: var(--mantine-font-size-sm);
+  margin-top: var(--mantine-spacing-xs);
+
+  @media (max-width: 768px) {
+    font-size: var(--mantine-font-size-xs); /* Reduce font size */
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px; /* Further reduce font size for small devices */
+  }
+}
+
+.stat {
+  flex: 1;
+  text-align: left; /* Align text left by default */
+
+  & + & {
+    padding-left: var(--mantine-spacing-xl);
+    margin-left: var(--mantine-spacing-xl);
+    border-left: 1px solid var(--mantine-color-blue-3);
+
+    @media (max-width: 768px) {
+      padding-left: 0;
+      margin-left: 0;
+      border-left: 0;
+      padding-top: var(--mantine-spacing-md);
+      margin-top: var(--mantine-spacing-md);
+      border-top: 1px solid var(--mantine-color-blue-3);
+    }
+
+    @media (max-width: 480px) {
+      padding-top: var(--mantine-spacing-sm); /* Compact spacing for mobile */
+      margin-top: var(--mantine-spacing-sm);
+    }
+  }
+}

@@ -1,0 +1,64 @@
+.container {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.item {
+  margin-bottom: 3rem;
+}
+
+/* Flex row for paragraph and video */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+/* Text Section */
+.textSection {
+  flex: 1;
+  min-width: 300px;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.paragraph {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: var(--mantine-color-gray-7);
+}
+
+/* Video Section */
+.videoSection {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.videoFrame {
+  width: 100%;
+  height: 300px;
+  border-radius: var(--mantine-radius-md);
+  border: 1px solid var(--mantine-color-gray-2);
+}
+
+/* Button Wrapper */
+.buttonWrapper {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,255 @@
+# Pages API
+
+The Pages API provides CRUD operations for managing pages.
+
+## Endpoints
+
+### `GET /api/pages`
+
+Fetches all pages.
+
+**Response:**
+
+```json
+[
+  {
+    "id": 1,
+    "title": "Page 1",
+    "slug": "page-1",
+    "content": "Content of Page 1",
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-01T00:00:00Z"
+  },
+  ...
+]
+```
+GET /api/pages/:slug
+
+Fetches a specific page by slug.
+
+Example Request:
+
+GET /api/pages/page-1
+
+Response:
+```json
+{
+  "id": 1,
+  "title": "Page 1",
+  "slug": "page-1",
+  "content": "Content of Page 1",
+  "createdAt": "2024-01-01T00:00:00Z",
+  "updatedAt": "2024-01-01T00:00:00Z"
+}
+```
+PUT /api/pages/:slug
+
+Updates a specific page by slug.
+
+Example Request:
+
+PUT /api/pages/page-1
+Content-Type: application/json
+```json
+{
+  "title": "Updated Page 1",
+  "content": "Updated content of Page 1"
+}
+```
+Response:
+```json
+{
+  "id": 1,
+  "title": "Updated Page 1",
+  "slug": "page-1",
+  "content": "Updated content of Page 1",
+  "createdAt": "2024-01-01T00:00:00Z",
+  "updatedAt": "2024-01-02T00:00:00Z"
+}
+```
+### 3. **Blogs API Documentation** (`blogs-api.mdx`)
+
+This page explains the API endpoints for blogs.
+
+
+# Blogs API
+
+The Blogs API provides CRUD operations for managing blog posts.
+
+## Endpoints
+
+### `GET /api/blogs`
+
+Fetches all blogs.
+
+**Response:**
+
+```json
+[
+  {
+    "id": 1,
+    "title": "Blog 1",
+    "slug": "blog-1",
+    "content": "Content of Blog 1",
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-01T00:00:00Z"
+  },
+  ...
+]
+```
+GET /api/blogs/:slug
+
+Fetches a specific blog by slug.
+
+Example Request:
+
+GET /api/blogs/blog-1
+
+Response:
+```json
+{
+  "id": 1,
+  "title": "Blog 1",
+  "slug": "blog-1",
+  "content": "Content of Blog 1",
+  "createdAt": "2024-01-01T00:00:00Z",
+  "updatedAt": "2024-01-01T00:00:00Z"
+}
+```
+POST /api/blogs
+
+Creates a new blog post.
+
+Example Request:
+
+POST /api/blogs
+Content-Type: application/json
+```json
+{
+  "title": "New Blog",
+  "slug": "new-blog",
+  "content": "Content of the new blog"
+}
+```
+Response:
+```json
+{
+  "id": 2,
+  "title": "New Blog",
+  "slug": "new-blog",
+  "content": "Content of the new blog",
+  "createdAt": "2024-01-02T00:00:00Z",
+  "updatedAt": "2024-01-02T00:00:00Z"
+}
+```
+PUT /api/blogs/:slug
+
+Updates a specific blog post.
+
+Example Request:
+
+PUT /api/blogs/blog-1
+Content-Type: application/json
+```json
+{
+  "title": "Updated Blog",
+  "content": "Updated content of Blog 1"
+}
+```
+Response:
+```json
+{
+  "id": 1,
+  "title": "Updated Blog",
+  "slug": "blog-1",
+  "content": "Updated content of Blog 1",
+  "createdAt": "2024-01-01T00:00:00Z",
+  "updatedAt": "2024-01-02T00:00:00Z"
+}
+```
+DELETE /api/blogs/:slug
+
+Deletes a blog post.
+
+Example Request:
+
+DELETE /api/blogs/blog-1
+
+Response:
+```json
+{
+  "message": "Blog deleted successfully"
+}
+```
+### 4. **Authentication API Documentation** (`auth-api.mdx`)
+
+This page explains the API endpoints for authentication.
+
+
+# Authentication API
+
+The Authentication API allows you to handle admin login and registration.
+
+## Endpoints
+
+### `POST /api/auth/login`
+
+Allows the admin to log in.
+
+**Example Request:**
+
+
+POST /api/auth/login
+Content-Type: application/json
+```json
+{
+  "username": "admin",
+  "password": "adminpassword"
+}
+```
+Response:
+```json
+{
+  "token": "jwt-token-here"
+}
+```
+POST /api/auth/register
+
+Allows the admin to register.
+
+Example Request:
+
+POST /api/auth/register
+Content-Type: application/json
+```json
+{
+  "username": "newadmin",
+  "password": "newadminpassword"
+}
+```
+Response:
+```json
+{
+  "message": "Registration successful"
+}
+```
+---
+
+### 5. **Sidebar Configuration (for Nextra)**
+
+To add a sidebar navigation, configure it in your `docs/_sidebar.mdx` file like so:
+
+
+- [Home](/)
+- [Pages API](/pages-api)
+- [Blogs API](/blogs-api)
+- [Authentication API](/auth-api)
+
+
+6. Start the Development Server
+
+To view your documentation, run:
+
+npm run dev
+
+This setup will give you detailed pages for your API routes, explaining the different CRUD operations for Pages, Blogs, and Authentication, and will provide a clean navigation structure via the sidebar.

@@ -1,0 +1,107 @@
+# Authentication API
+
+The Authentication API provides endpoints for managing admin login and registration.
+
+## Endpoints
+
+### `POST /api/auth/login`
+
+Admin login to authenticate and receive a JWT token.
+
+**Request:**
+
+
+POST /api/auth/login
+Content-Type: application/json
+
+Request Body:
+```json
+{
+  "email": "admin@example.com",
+  "password": "adminpassword"
+}
+```
+
+Response:
+```json
+{
+  "token": "your_jwt_token"
+}
+```
+
+Response Codes:
+	•	200 OK – Successfully authenticated and token returned.
+	•	400 Bad Request – Invalid email or password provided.
+	•	401 Unauthorized – The credentials are incorrect.
+	•	500 Internal Server Error – An unexpected error occurred on the server.
+
+POST /api/auth/register
+
+Admin registration to create a new admin account.
+
+Request:
+
+POST /api/auth/register
+Content-Type: application/json
+
+Request Body:
+```json
+{
+  "name": "Admin User",
+  "email": "admin@example.com",
+  "password": "adminpassword"
+}
+```
+Response:
+```json
+{
+  "message": "Registration successful. You can now login."
+}
+```
+
+Response Codes:
+	•	201 Created – Admin successfully registered.
+	•	400 Bad Request – Missing required parameters or invalid data.
+	•	409 Conflict – Email already exists.
+	•	500 Internal Server Error – An unexpected error occurred on the server.
+
+Example Usage
+
+Admin Login
+
+To authenticate an admin:
+
+POST /api/auth/login
+Content-Type: application/json
+```json
+{
+  "email": "admin@example.com",
+  "password": "adminpassword"
+}
+```
+Example Response:
+```json
+{
+  "token": "your_jwt_token"
+}
+```
+Admin Registration
+
+To register a new admin:
+
+POST /api/auth/register
+Content-Type: application/json
+```json
+{
+  "name": "Admin User",
+  "email": "admin@example.com",
+  "password": "adminpassword"
+}
+```
+Example Response:
+```json
+{
+  "message": "Registration successful. You can now login."
+}
+```
+

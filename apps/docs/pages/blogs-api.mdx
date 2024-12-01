@@ -1,0 +1,180 @@
+# Blogs API
+
+The Blogs API provides CRUD operations for managing blog posts. This API allows you to create, read, update, and delete blog posts.
+
+## Endpoints
+
+### `GET /api/blogs`
+
+Fetches all blog posts.
+
+#### Request
+
+
+### `GET /api/blogs`
+
+#### Response
+
+```bash
+[
+  {
+    "id": 1,
+    "title": "Blog 1",
+    "slug": "blog-1",
+    "content": "Content of Blog 1",
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": 2,
+    "title": "Blog 2",
+    "slug": "blog-2",
+    "content": "Content of Blog 2",
+    "createdAt": "2024-01-02T00:00:00Z",
+    "updatedAt": "2024-01-02T00:00:00Z"
+  }
+]
+```
+
+### GET /api/blogs/:slug
+
+Fetches a specific blog post by its slug.
+
+#### Request
+
+### GET /api/blogs/blog-1
+
+#### Response
+```bash
+{
+  "id": 1,
+  "title": "Blog 1",
+  "slug": "blog-1",
+  "content": "Content of Blog 1",
+  "createdAt": "2024-01-01T00:00:00Z",
+  "updatedAt": "2024-01-01T00:00:00Z"
+}
+```
+### POST /api/blogs
+
+Creates a new blog post.
+
+#### Request
+
+### POST /api/blogs
+Content-Type: application/json
+```bash
+{
+  "title": "New Blog",
+  "slug": "new-blog",
+  "content": "Content of the new blog"
+}
+
+Response
+
+{
+  "id": 3,
+  "title": "New Blog",
+  "slug": "new-blog",
+  "content": "Content of the new blog",
+  "createdAt": "2024-01-03T00:00:00Z",
+  "updatedAt": "2024-01-03T00:00:00Z"
+}
+```
+### `PUT /api/blogs/:slug`
+
+Updates a specific blog post by its slug.
+
+Request
+
+### `PUT /api/blogs/blog-1`
+Content-Type: application/json
+```bash
+{
+  "title": "Updated Blog 1",
+  "content": "Updated content of Blog 1"
+}
+```
+Response
+```bash
+{
+  "id": 1,
+  "title": "Updated Blog 1",
+  "slug": "blog-1",
+  "content": "Updated content of Blog 1",
+  "createdAt": "2024-01-01T00:00:00Z",
+  "updatedAt": "2024-01-02T00:00:00Z"
+}
+```
+### `DELETE /api/blogs/:slug`
+
+Deletes a specific blog post by its slug.
+
+Request
+
+DELETE /api/blogs/blog-1
+
+Response
+```bash
+{
+  "message": "Blog deleted successfully"
+}
+```
+
+Response Codes
+
+	•	200 OK – Request succeeded, content returned (for GET requests) or action performed (for POST, PUT, DELETE).
+	•	201 Created – Blog successfully created (for POST requests).
+	•	204 No Content – Blog successfully deleted (for DELETE requests).
+	•	400 Bad Request – The request is invalid or missing required parameters.
+	•	404 Not Found – The requested resource (blog post) is not found.
+	•	500 Internal Server Error – An unexpected error occurred on the server.
+
+Example Usage
+
+Get All Blogs
+
+To fetch all the blogs:
+
+GET `/api/blogs`
+
+Example Response:
+```bash
+[
+  {
+    "id": 1,
+    "title": "Blog 1",
+    "slug": "blog-1",
+    "content": "Content of Blog 1",
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-01T00:00:00Z"
+  }
+]
+```
+Create a Blog
+
+To create a new blog post:
+
+POST /api/blogs
+Content-Type: application/json
+```bash
+{
+  "title": "A New Blog Post",
+  "slug": "a-new-blog-post",
+  "content": "This is a new blog post"
+}
+```
+Example Response:
+```bash
+{
+  "id": 4,
+  "title": "A New Blog Post",
+  "slug": "a-new-blog-post",
+  "content": "This is a new blog post",
+  "createdAt": "2024-01-04T00:00:00Z",
+  "updatedAt": "2024-01-04T00:00:00Z"
+}
+```
+This document outlines all the key operations and responses for interacting with the Blogs API. You can use these endpoints to fully manage blog posts in your application.
+
+This structure mimics the Swagger-like format for your Blogs API, providing clear, concise, and well-organized information on the available endpoints, along with request and response details.
