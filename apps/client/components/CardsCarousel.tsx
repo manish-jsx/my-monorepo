@@ -67,7 +67,6 @@ export function CardsCarousel() {
       slideSize="100%" // Ensure only one card is visible at a time with 100% width
       slideGap="xs" // Optional, adjust as needed
       align="center" // Centers the slides in the carousel
-      transition="fade"
       slidesToScroll={1} // Scroll one item at a time
       loop // Enable looping through carousel items
     >

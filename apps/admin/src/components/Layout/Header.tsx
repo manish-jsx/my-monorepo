@@ -99,7 +99,7 @@ import {
 } from '@tabler/icons-react';
 import Link from 'next/link';
 import { MantineLogo } from '@/components/Logo';
-import { ColorSchemeToggle } from '@/components/ColorSchemeToggle';
+import { ActionToggle } from '@/components/ActionToggle';
 
 export function Header() {
   return (
@@ -107,13 +107,13 @@ export function Header() {
       <Group>
         <MantineLogo size={30} />
         <Text size="xl" fw={700}>
-          Admin Dashboard
+         Ragiji Foundation
         </Text>
       </Group>
 
       <Group justify="space-between">
         {/* Color Scheme Toggle */}
-        <ColorSchemeToggle />
+        <ActionToggle />
 
         {/* User Menu */}
         <Menu shadow="md" width={200}>

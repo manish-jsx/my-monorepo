@@ -10,15 +10,14 @@ import { SuccessStoriesContainer } from "../../components/SuccessStories";
 const HomePage = () => {
   return (
     <>
-     <CardsCarousel/>
-     <Foundation/>
-      <StatsGroup/>
-
-     <ArticlesCardsGrid/>
-     <SuccessStoriesContainer/>
+      <CardsCarousel />
+      <Foundation />
+      <StatsGroup />
+      <ArticlesCardsGrid />
+      <SuccessStoriesContainer />
 
     </>
-   
+
 
   );
 };

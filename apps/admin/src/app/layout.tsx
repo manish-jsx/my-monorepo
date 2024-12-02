@@ -67,34 +67,36 @@
 //     </html>
 //   );
 // }
+'use client';
 
-// /app/layout.tsx (Server Component)
-import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+import { MantineProvider } from '@mantine/core';
 import AdminLayout from '@/components/Layout/AdminLayout';
+import { usePathname } from 'next/navigation';
 
-import { theme } from '@/lib/theme';
-import { cookies } from 'next/headers';
 
 import '@mantine/core/styles.css';
 import '@mantine/tiptap/styles.css';
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  // Server-side color scheme retrieval (Server Component)
-  const cookieStore = await cookies();
-  const savedColorScheme = cookieStore.get('mantine-color-scheme')?.value as 'light' | 'dark' | undefined;
-  
-  // This value is passed down to the Client Component
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname(); // Get the current route
+  const isAuthRoute = pathname === '/auth/login'; // Check if it's the login page
+
+
+
+ 
+
   return (
     <html lang="en">
       <head>
-        <ColorSchemeScript defaultColorScheme={savedColorScheme || 'light'} />
+      
       </head>
       <body>
-        <MantineProvider theme={theme} defaultColorScheme={savedColorScheme || 'light'}>
-          {/* Pass the color scheme to the client-side */}
-          <AdminLayout>
-      {children} {/* Pass the content inside the AdminLayout */}
-    </AdminLayout>
+        <MantineProvider defaultColorScheme="light">
+          {isAuthRoute ? (
+            children /* Render children directly for /auth/login */
+          ) : (
+            <AdminLayout>{children}</AdminLayout> /* Wrap other pages in AdminLayout */
+          )}
         </MantineProvider>
       </body>
     </html>

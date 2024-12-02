@@ -103,7 +103,7 @@
 // }
 
 import { IconChevronDown, IconSearch } from '@tabler/icons-react';
-import { Autocomplete, Burger, Group, Menu, Center, Drawer } from '@mantine/core';
+import { Autocomplete, Burger, Group, Menu, Center, Drawer,Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { MantineLogo } from '@mantinex/mantine-logo';
 import classes from './HeaderSearch.module.css';
@@ -208,48 +208,32 @@ export function HeaderMenu() {
 
       {/* Mobile Navigation Drawer */}
       <Drawer
-        opened={drawerOpened}
-        onClose={close}
-        position="left"
-        size="100%"
-        padding="md"
-        title="Navigation"
+  opened={drawerOpened}
+  onClose={close}
+  position="left"
+  size="100%"
+  padding="md"
+  title="Navigation"
+>
+  <Stack spacing="xs">
+    {links.map((link) => (
+      <a
+        key={link.label}
+        href={link.link}
+        className={classes.link}
+        onClick={(e) => {
+          e.preventDefault();
+          close();
+        }}
       >
-        <Group direction="column" spacing="xs">
-          {/* Mobile Navigation Links */}
-          {navItems.map((item) => (
-            <a key={item.key} href={item.props.href} className={classes.link}>
-              {item.props.children}
-            </a>
-          ))}
-        </Group>
-      </Drawer>
+        {link.label}
+      </a>
+    ))}
+  </Stack>
+</Drawer>
 
       {/* Mobile Drawer Toggle */}
-      <Drawer
-        opened={drawerOpened}
-        onClose={close}
-        position="left"
-        size="100%"
-        padding="md"
-        title="Menu"
-      >
-        <Group direction="column" spacing="xs">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.link}
-              className={classes.link}
-              onClick={(e) => {
-                e.preventDefault();
-                close();
-              }}
-            >
-              {link.label}
-            </a>
-          ))}
-        </Group>
-      </Drawer>
+     
     </header>
   );
 }

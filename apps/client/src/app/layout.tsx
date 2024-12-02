@@ -3,7 +3,7 @@ import '@mantine/core/styles.css';
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 import { HeaderMenu } from "../../components/HeaderMenu";
 import { FooterLinks } from "../../components/FooterLinks";
-import { MobileNavbar } from '../../components/MobileNavbar';
+
 
 
 
@@ -23,7 +23,7 @@ export default function RootLayout({
           {/* Ensure that the header and footer are inside MantineProvider */}
         
           <HeaderMenu />
-          <MobileNavbar/>
+         
          
           <main>{children}</main>
           <FooterLinks />
