@@ -1,0 +1,94 @@
+.header {
+  background-color: #f0f0f0;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.links {
+  display: flex;
+}
+
+.link {
+  margin-right: 20px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: background-color 0.3s ease; /* Add transition for smooth hover */
+}
+
+.link:hover {
+  background-color: #f0f0f0; /*Light gray background on hover*/
+  text-decoration: none; /* Add underline on hover*/
+}
+
+
+.dropdownLink {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: background-color 0.3s ease; /* Add transition for smooth hover */
+}
+
+.dropdownLink:hover {
+    background-color: #f0f0f0; /*Light gray background on hover*/
+    text-decoration: none; /* Add underline on hover*/
+}
+
+.search {
+  width: 250px;
+}
+
+/* Styles for mobile drawer */
+@media (max-width: 767px) {
+  .search {
+    width: calc(100% - 20px);
+    margin-top: 1rem;
+  }
+  .inner {
+    flex-direction: column;
+    padding: 0.9rem 0;
+    
+  }
+  .drawer-stack {
+    width: 100%;
+  }
+  .drawer-stack a {
+    display: block;
+    padding-left: 1rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid #938d8d;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s ease; /* Add transition for smooth hover */
+  }
+  .drawer-stack a:hover {
+    background-color: #f0f0f0; /*Light gray background on hover*/
+    text-decoration: none; /* Add underline on hover*/
+    
+ 
+  }
+ 
+  .drawer-stack a:last-child {
+    border-bottom: none;
+    
+  }
+  .drawer-stack h3 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    
+  }
+}

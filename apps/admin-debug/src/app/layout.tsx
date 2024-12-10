@@ -11,12 +11,12 @@ import '@mantine/tiptap/styles.css';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
-  useEffect(() => {
-    const cookie = document.cookie.split('; ').find(c => c.startsWith('authToken='));
-    setIsLoggedIn(!!cookie);
-  }, []);
+  // useEffect(() => {
+  //   const cookie = document.cookie.split('; ').find(c => c.startsWith('authToken='));
+  //   setIsLoggedIn(!!cookie);
+  // }, []);
 
 
   return (

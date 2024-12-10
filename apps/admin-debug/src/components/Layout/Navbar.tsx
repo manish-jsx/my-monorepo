@@ -1,7 +1,7 @@
 
 
 import Link from 'next/link';
-import { IconProps } from '@tabler/icons-react';
+import { IconLayoutBottombarFilled, IconLayoutNavbar, IconLayoutNavbarFilled, IconProps, IconPyramid } from '@tabler/icons-react';
 import {
   IconDashboard,
   IconFileText,
@@ -52,7 +52,9 @@ const pagesLinks: PageLink[] = [
       { link: '/pages/electronic-media', label: 'ELECTRONIC MEDIA' },
     ],
   },
-  { link: '/pages/contact-us', label: 'CONTACT US', icon: IconMessage },
+  { link: '/pages/contact-us', label: 'CONTACT US', icon: IconMessage }
+  
+  
 ];
 
 export function Navbar() {
@@ -115,6 +117,44 @@ export function Navbar() {
           {pagesLinks.map((item) => (
             <NavLinkWithChildren key={item.link} item={item} />
           ))}
+        </NavLink>
+
+
+        {/* Blogs with Nested Navigation */}
+        <NavLink
+          label="Global Components"
+          leftSection={<IconNews size={16} />}
+          childrenOffset={28}
+          className={classes.navButton}
+        >
+           <Link href='/logo' passHref legacyBehavior>
+            <NavLink
+              component="a"
+              label="Logo"
+              leftSection={<IconPyramid size={16} />}
+            />
+          </Link>
+          <Link href='/header' passHref legacyBehavior>
+            <NavLink
+              component="a"
+              label="Header"
+              leftSection={<IconLayoutNavbar size={16} />}
+            />
+          </Link>
+          <Link href='/navbar' passHref legacyBehavior>
+            <NavLink
+              component="a"
+              label="Navbar"
+              leftSection={<IconLayoutNavbarFilled size={16} />}
+            />
+          </Link>
+          <Link href='/footer' passHref legacyBehavior>
+            <NavLink
+              component="a"
+              label="Footer"
+              leftSection={<IconLayoutBottombarFilled size={16} />}
+            />
+          </Link>
         </NavLink>
 
         {/* Settings */}
