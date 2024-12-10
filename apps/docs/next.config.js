@@ -1,3 +1,4 @@
+// next.config.js
 import nextra from 'nextra';
 
 const withNextra = nextra({
@@ -5,4 +6,9 @@ const withNextra = nextra({
   themeConfig: './theme.config.js',
 });
 
-export default withNextra({});
+export default withNextra({
+  output: 'export',
+  images: {
+    unoptimized: true,  
+  },
+});
