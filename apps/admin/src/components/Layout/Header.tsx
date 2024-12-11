@@ -90,7 +90,8 @@ import {
   Group, 
   Text, 
   Avatar, 
-  Menu
+  Menu,
+
 } from '@mantine/core';
 import { 
   IconLogout, 
@@ -100,8 +101,17 @@ import {
 import Link from 'next/link';
 import { MantineLogo } from '@/components/Logo';
 import { ActionToggle } from '@/components/ActionToggle';
+import { useRouter } from 'next/navigation';
+
 
 export function Header() {
+  const router = useRouter();
+
+  const handleLogout = () => {
+    document.cookie = 'authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; HttpOnly; SameSite=Strict'; //Remove the authToken cookie
+    router.push('/auth/login'); // Redirect to login
+  };
+
   return (
     <Group h="100%" px="md" justify="space-between" align="center">
       <Group>
@@ -127,28 +137,18 @@ export function Header() {
 
           <Menu.Dropdown>
             <Menu.Label>Account</Menu.Label>
-            <Menu.Item 
-              leftSection={<IconUser size={14} />}
-              component={Link}
-              href="/profile"
-            >
+            <Menu.Item leftSection={<IconUser size={14} />} component={Link} href="/profile">
               Profile
             </Menu.Item>
-            <Menu.Item 
-              leftSection={<IconSettings size={14} />}
-              component={Link}
-              href="/account-settings"
-            >
+            <Menu.Item leftSection={<IconSettings size={14} />} component={Link} href="/account-settings">
               Account Settings
             </Menu.Item>
             <Menu.Divider />
-            <Menu.Item
-              color="red"
-              leftSection={<IconLogout size={14} />}
-            >
+            <Menu.Item color="red" leftSection={<IconLogout size={14} />} onClick={handleLogout}>
               Logout
             </Menu.Item>
           </Menu.Dropdown>
+
         </Menu>
       </Group>
     </Group>

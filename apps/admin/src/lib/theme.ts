@@ -26,6 +26,5 @@ export const theme = createTheme({
         color: 'brand'
       }
     }
-  },
-  defaultColorScheme: 'light'
+  }
 });

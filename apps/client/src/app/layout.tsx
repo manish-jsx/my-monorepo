@@ -1,27 +1,34 @@
-'use client'
+
 import '@mantine/core/styles.css';
-import React from 'react';
 
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
-import { HeaderMenu } from "../components/HeaderMenu";
-import { FooterLinks } from "../components/FooterLinks";
+import { HeaderMenu } from "@/components/HeaderMenu";
+import { FooterLinks } from "@/components/FooterLinks";
+export const metadata = {
+  title: 'My Mantine app',
+  description: 'I have followed setup instructions carefully',
+};
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  console.log('RootLayout rendered. Props:', children);
-
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <ColorSchemeScript />
+      </head>
       <body>
         <MantineProvider>
-          <ColorSchemeScript />
-          <HeaderMenu />
-          <main>{children}</main>
-          <FooterLinks />
-        </MantineProvider>
+       <main>
+        <HeaderMenu/>
+       {children}
+       <FooterLinks/>
+       </main>
+         
+         
+          </MantineProvider>
       </body>
     </html>
   );

@@ -1,13 +1,28 @@
-'use client'
+'use client';
 import { Container, Text, Card } from '@mantine/core';
-import { useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation'; // Import useParams
+
+// Define the type for your blog data
+interface Blog {
+  title: string;
+  content: string;
+}
 
 export default function BlogPreviewPage() {
-  const { query } = useRouter();
-  const { slug } = query;
+  // Use useParams to access the slug parameter.
+  const { slug } = useParams();
 
-  // Example static blog preview data
-  const blog = {
+  //Check if slug is defined
+  if (!slug) {
+    return (
+      <Container>
+        <Text>No blog found.</Text>
+      </Container>
+    );
+  }
+
+  // Example static blog preview data with types.  Replace this with fetching actual blog data.
+  const blog: Blog = {
     title: 'Sample Blog Title',
     content: 'This is the preview of the blog content...',
   };
@@ -21,5 +36,3 @@ export default function BlogPreviewPage() {
     </Container>
   );
 }
-
-

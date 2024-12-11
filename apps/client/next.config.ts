@@ -1,15 +1,11 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  reactStrictMode: true, 
+  output: 'export',
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'via.placeholder.com',
-        port: '',
-        pathname: '/**', // This will allow all paths under the domain
-      },
-    ],
+    unoptimized: true, 
+    domains: ['via.placeholder.com'], // Add other domains as needed
   },
 };
 

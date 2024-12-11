@@ -1,3 +1,194 @@
+// const [drafts, setDrafts] = useState(initialDrafts);
+// const [searchTerm, setSearchTerm] = useState('');
+// const [filterStatus, setFilterStatus] = useState('');
+// const [itemsPerPage, setItemsPerPage] = useState(5); // Default number of items per page
+// const [currentPage, setCurrentPage] = useState(1);
+
+// // Filtering logic
+// const filteredDrafts = drafts.filter((draft) => {
+//   const matchesSearch = draft.title.toLowerCase().includes(searchTerm.toLowerCase());
+//   const matchesStatus = filterStatus ? draft.status === filterStatus : true;
+//   return matchesSearch && matchesStatus;
+// });
+
+// // Paginate the filtered drafts
+// const totalItems = filteredDrafts.length;
+// const startIndex = (currentPage - 1) * itemsPerPage;
+// const currentPageDrafts = filteredDrafts.slice(startIndex, startIndex + itemsPerPage);
+
+// const handleEdit = (slug: string) => {
+//   alert(`Editing draft: ${slug}`);
+//   // Navigate to the edit page or open an edit modal
+// };
+
+// const handleDelete = (slug: string) => {
+//   const updatedDrafts = drafts.filter((draft) => draft.slug !== slug);
+//   setDrafts(updatedDrafts);
+//   alert(`Deleted draft: ${slug}`);
+// };
+
+// const handleView = (slug: string) => {
+//   alert(`Viewing draft: ${slug}`);
+//   // Navigate to the full draft or view the details
+// };
+
+// // Define icons for the buttons
+// const editIcon = <IconEdit size={14} />;
+// const deleteIcon = <IconTrash size={14} />;
+// const viewIcon = <IconEye size={14} />;
+
+// return (
+//   <Container size="lg">
+//     <Text size="xl" fw={700} mb="md">
+//       Blog Drafts
+//     </Text>
+
+//     {/* Search and Filter Section */}
+//     <Group mb="lg" gap="md" justify="space-between" grow>
+//     <TextInput
+//         placeholder="Search drafts..."
+//         value={searchTerm}
+//         onChange={(e) => setSearchTerm(e.target.value)}
+//         style={{ flexGrow: 1 }}
+//         icon={<IconSearch size={18} />} {/* Correct placement of icon prop */}
+//       />
+
+//       <Select
+//         placeholder="Filter by status"
+//         icon={<IconFilter size={18} />}
+//         value={filterStatus}
+//         onChange={setFilterStatus}
+//         data={[
+//           { value: '', label: 'All' },
+//           { value: 'Ready to Publish', label: 'Ready to Publish' },
+//           { value: 'Not Approved', label: 'Not Approved' },
+//           { value: 'Draft', label: 'Draft' },
+//         ]}
+//         style={{ width: 200 }}
+//       />
+
+//       {/* Select items per page */}
+//       <Select
+//         placeholder="Items per page"
+//         value={itemsPerPage.toString()}
+//         onChange={(value) => setItemsPerPage(Number(value))}
+//         data={[
+//           { value: '5', label: '5' },
+//           { value: '10', label: '10' },
+//           { value: '15', label: '15' },
+//         ]}
+//         style={{ width: 100 }}
+//       />
+//     </Group>
+
+//     {/* Drafts Grid */}
+//     <Grid>
+//       {currentPageDrafts.length > 0 ? (
+//         currentPageDrafts.map((draft) => (
+//           <Grid.Col key={draft.slug} span={12} md={6}>
+//             <Card shadow="sm" radius="md" padding={0} withBorder>
+//               <Group wrap="nowrap" gap={0}>
+//                 <Image
+//                   src={draft.image}
+//                   height={160}
+//                   width={160}
+//                   alt={draft.title}
+//                   onClick={() => handleView(draft.slug)}
+//                   style={{ cursor: 'pointer' }}
+//                 />
+
+//                 <div style={{ padding: '1rem' }}>
+//                   <Text tt="uppercase" color="dimmed" fw={700} size="xs" mb="xs">
+//                     {draft.tags.join(', ')}
+//                   </Text>
+//                   <Text fw={700} size="lg" mb="xs" lineClamp={2}>
+//                     {draft.title}
+//                   </Text>
+//                   <Text size="sm" color="dimmed" mb="sm" lineClamp={2}>
+//                     {draft.preview}
+//                   </Text>
+
+//                   <Group gap="xs" wrap="nowrap">
+//                     <Avatar src={draft.avatar} size="sm" />
+//                     <Text size="xs">{draft.author}</Text>
+//                     <Text size="xs" color="dimmed">
+//                       •
+//                     </Text>
+//                     <Text size="xs" color="dimmed">
+//                       {draft.date}
+//                     </Text>
+//                   </Group>
+
+//                   <Badge
+//                     color={
+//                       draft.status === 'Ready to Publish'
+//                         ? 'green'
+//                         : draft.status === 'Not Approved'
+//                         ? 'red'
+//                         : 'gray'
+//                     }
+//                     variant="filled"
+//                     mt="xs"
+//                   >
+//                     {draft.status}
+//                   </Badge>
+
+//                   {/* Buttons with Icons */}
+//                   <Group gap="xs" mt="md">
+//                     <Button
+//                       size="xs"
+//                       justify="center"
+//                       leftSection={editIcon}
+//                       onClick={(e) => { e.stopPropagation(); handleEdit(draft.slug); }}
+//                       variant="default"
+//                     >
+//                       Edit
+//                     </Button>
+//                     <Button
+//                       size="xs"
+//                       color="red"
+//                       justify="center"
+//                       leftSection={deleteIcon}
+//                       onClick={(e) => { e.stopPropagation(); handleDelete(draft.slug); }}
+//                       variant="default"
+//                     >
+//                       Delete
+//                     </Button>
+//                     <Button
+//                       size="xs"
+//                       justify="center"
+//                       leftSection={viewIcon}
+//                       onClick={(e) => { e.stopPropagation(); handleView(draft.slug); }}
+//                       variant="default"
+//                     >
+//                       View
+//                     </Button>
+//                   </Group>
+//                 </div>
+//               </Group>
+//             </Card>
+//           </Grid.Col>
+//         ))
+//       ) : (
+//         <Text size="md" color="dimmed">
+//           No drafts found.
+//         </Text>
+//       )}
+//     </Grid>
+
+//     {/* Pagination */}
+//     <Group justify="center" mt="lg">
+//       <Pagination
+//         page={currentPage}
+//         onChange={setCurrentPage}
+//         total={Math.ceil(totalItems / itemsPerPage)}
+//       />
+//     </Group>
+//   </Container>
+// )
+// };
+
+
 
 "use client";
 import { useState } from 'react';
@@ -15,14 +206,28 @@ import {
   Pagination,
   Button,
 } from '@mantine/core';
-import { IconSearch, IconFilter, IconEdit, IconTrash, IconEye } from '@tabler/icons-react';
-import Link from 'next/link';
+import {  IconFilter, IconEdit, IconTrash, IconEye } from '@tabler/icons-react';
+
+// Define the type for a blog draft
+interface BlogDraft {
+  slug: string;
+  title: string;
+  preview: string;
+  tags: string[];
+  status: string;
+  author: string;
+  date: string;
+  image: string;
+  avatar: string;
+}
+
 
 export default function BlogDraftsPage() {
  
 
 
-const initialDrafts = [
+
+  const initialDrafts: BlogDraft[]= [
   {
     slug: 'draft-one',
     title: 'The Future of Technology',
@@ -135,86 +340,87 @@ const initialDrafts = [
   },
 ];
 
+
+
 const [drafts, setDrafts] = useState(initialDrafts);
-const [searchTerm, setSearchTerm] = useState('');
-const [filterStatus, setFilterStatus] = useState('');
-const [itemsPerPage, setItemsPerPage] = useState(5); // Default number of items per page
+const [searchTerm, setSearchTerm] = useState<string>("");
+const [filterStatus, setFilterStatus] = useState<string>('');
+
+const [itemsPerPage, setItemsPerPage] = useState(5);
 const [currentPage, setCurrentPage] = useState(1);
 
 // Filtering logic
 const filteredDrafts = drafts.filter((draft) => {
-  const matchesSearch = draft.title.toLowerCase().includes(searchTerm.toLowerCase());
-  const matchesStatus = filterStatus ? draft.status === filterStatus : true;
+  const matchesSearch = draft.title
+    .toLowerCase()
+    .includes(searchTerm.toLowerCase());
+  const matchesStatus = filterStatus
+    ? draft.status === filterStatus
+    : true;
   return matchesSearch && matchesStatus;
 });
 
 // Paginate the filtered drafts
 const totalItems = filteredDrafts.length;
 const startIndex = (currentPage - 1) * itemsPerPage;
-const currentPageDrafts = filteredDrafts.slice(startIndex, startIndex + itemsPerPage);
+const currentPageDrafts = filteredDrafts.slice(
+  startIndex,
+  startIndex + itemsPerPage
+);
 
-const handleEdit = (slug) => {
+const handleEdit = (slug: string) => {
   alert(`Editing draft: ${slug}`);
   // Navigate to the edit page or open an edit modal
 };
 
-const handleDelete = (slug) => {
+const handleDelete = (slug: string) => {
   const updatedDrafts = drafts.filter((draft) => draft.slug !== slug);
   setDrafts(updatedDrafts);
   alert(`Deleted draft: ${slug}`);
 };
 
-const handleView = (slug) => {
+const handleView = (slug: string) => {
   alert(`Viewing draft: ${slug}`);
   // Navigate to the full draft or view the details
 };
 
-// Define icons for the buttons
-const editIcon = <IconEdit size={14} />;
-const deleteIcon = <IconTrash size={14} />;
-const viewIcon = <IconEye size={14} />;
-
 return (
   <Container size="lg">
-    <Text size="xl" weight={700} mb="md">
+    <Text size="xl" fw={700} mb="md">
       Blog Drafts
     </Text>
 
     {/* Search and Filter Section */}
-    <Group mb="lg" spacing="md" position="apart" align="center">
+    <Group mb="lg" gap="md" justify="space-between" grow>
       <TextInput
         placeholder="Search drafts..."
-        icon={<IconSearch size={18} />}
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        style={{ flexGrow: 1 }}
+       
       />
 
       <Select
         placeholder="Filter by status"
-        icon={<IconFilter size={18} />}
+        leftSection={<IconFilter size={18} />}
         value={filterStatus}
-        onChange={setFilterStatus}
+        onChange={(value) => setFilterStatus(value ?? '')}
         data={[
-          { value: '', label: 'All' },
-          { value: 'Ready to Publish', label: 'Ready to Publish' },
-          { value: 'Not Approved', label: 'Not Approved' },
-          { value: 'Draft', label: 'Draft' },
+          { value: "", label: "All" },
+          { value: "Ready to Publish", label: "Ready to Publish" },
+          { value: "Not Approved", label: "Not Approved" },
+          { value: "Draft", label: "Draft" },
         ]}
-        style={{ width: 200 }}
       />
 
-      {/* Select items per page */}
       <Select
         placeholder="Items per page"
         value={itemsPerPage.toString()}
         onChange={(value) => setItemsPerPage(Number(value))}
         data={[
-          { value: '5', label: '5' },
-          { value: '10', label: '10' },
-          { value: '15', label: '15' },
+          { value: "5", label: "5" },
+          { value: "10", label: "10" },
+          { value: "15", label: "15" },
         ]}
-        style={{ width: 100 }}
       />
     </Group>
 
@@ -222,20 +428,21 @@ return (
     <Grid>
       {currentPageDrafts.length > 0 ? (
         currentPageDrafts.map((draft) => (
-          <Grid.Col key={draft.slug} span={12} md={6}>
+          <Grid.Col key={draft.slug} span={{ base: 12, xs: 6 }}>
             <Card shadow="sm" radius="md" padding={0} withBorder>
-              <Group wrap="nowrap" spacing={0}>
+              <Group wrap="nowrap" gap={0}>
                 <Image
                   src={draft.image}
                   height={160}
                   width={160}
+                  alt={draft.title}
                   onClick={() => handleView(draft.slug)}
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                 />
 
-                <div style={{ padding: '1rem' }}>
+                <div style={{ padding: "1rem" }}>
                   <Text tt="uppercase" color="dimmed" fw={700} size="xs" mb="xs">
-                    {draft.tags.join(', ')}
+                    {draft.tags.join(", ")}
                   </Text>
                   <Text fw={700} size="lg" mb="xs" lineClamp={2}>
                     {draft.title}
@@ -244,7 +451,7 @@ return (
                     {draft.preview}
                   </Text>
 
-                  <Group spacing="xs" wrap="nowrap">
+                  <Group gap="xs" wrap="nowrap">
                     <Avatar src={draft.avatar} size="sm" />
                     <Text size="xs">{draft.author}</Text>
                     <Text size="xs" color="dimmed">
@@ -257,46 +464,42 @@ return (
 
                   <Badge
                     color={
-                      draft.status === 'Ready to Publish'
-                        ? 'green'
-                        : draft.status === 'Not Approved'
-                        ? 'red'
-                        : 'gray'
+                      draft.status === "Ready to Publish"
+                        ? "green"
+                        : draft.status === "Not Approved"
+                        ? "red"
+                        : "gray"
                     }
-                    variant="filled"
-                    mt="xs"
                   >
                     {draft.status}
                   </Badge>
 
-                  {/* Buttons with Icons */}
-                  <Group spacing="xs" mt="md">
+                  <Group mt="md" gap="xs">
                     <Button
                       size="xs"
-                      justify="center"
-                      leftSection={editIcon}
-                      onClick={(e) => { e.stopPropagation(); handleEdit(draft.slug); }}
-                      variant="default"
+                      variant="light"
+                      color="blue"
+                      onClick={() => handleEdit(draft.slug)}
                     >
+                      <IconEdit size={14} />
                       Edit
                     </Button>
                     <Button
                       size="xs"
+                      variant="light"
                       color="red"
-                      justify="center"
-                      leftSection={deleteIcon}
-                      onClick={(e) => { e.stopPropagation(); handleDelete(draft.slug); }}
-                      variant="default"
+                      onClick={() => handleDelete(draft.slug)}
                     >
+                      <IconTrash size={14} />
                       Delete
                     </Button>
                     <Button
                       size="xs"
-                      justify="center"
-                      leftSection={viewIcon}
-                      onClick={(e) => { e.stopPropagation(); handleView(draft.slug); }}
-                      variant="default"
+                      variant="light"
+                      color="gray"
+                      onClick={() => handleView(draft.slug)}
                     >
+                      <IconEye size={14} />
                       View
                     </Button>
                   </Group>
@@ -306,20 +509,17 @@ return (
           </Grid.Col>
         ))
       ) : (
-        <Text size="md" color="dimmed">
-          No drafts found.
-        </Text>
+        <Text>No drafts found.</Text>
       )}
     </Grid>
 
     {/* Pagination */}
-    <Group position="center" mt="lg">
-      <Pagination
-        page={currentPage}
-        onChange={setCurrentPage}
-        total={Math.ceil(totalItems / itemsPerPage)}
-      />
-    </Group>
+    <Pagination
+      total={Math.ceil(totalItems / itemsPerPage)}
+      value={currentPage}
+      onChange={setCurrentPage}
+      mt="lg"
+    />
   </Container>
 );
 }

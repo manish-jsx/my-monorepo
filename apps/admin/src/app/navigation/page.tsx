@@ -13,7 +13,7 @@ export default function NavigationPage() {
       </Title>
       <TextInput label="Link Label" placeholder="Enter label" required mb="sm" />
       <TextInput label="Link URL" placeholder="Enter URL" required mb="lg" />
-      <Group position="right">
+      <Group justify='flex-end'>
         <Button onClick={handleSave}>Save</Button>
       </Group>
     </Container>

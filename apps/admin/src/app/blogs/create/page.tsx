@@ -9,7 +9,20 @@ import Underline from '@tiptap/extension-underline';
 import TextAlign from '@tiptap/extension-text-align';
 import Superscript from '@tiptap/extension-superscript';
 import SubScript from '@tiptap/extension-subscript';
-import { Button, Container, TextInput, Select, TagsInput, Group, Grid,Stack, Paper, Textarea, Fieldset } from '@mantine/core';
+import { Button, Container, TextInput, Grid,Stack, Paper, Textarea, Fieldset } from '@mantine/core';
+
+// Define types for your data
+interface BlogPost {
+  title: string;
+  category: string;
+  tags: string[];
+  slug: string;
+  author: string;
+  metaDescription: string;
+  ogTitle: string;
+  ogDescription: string;
+  content: string;
+}
 
 const initialContent = `
   <h2 style="text-align: center;">Create Your Blog Post</h2>
@@ -17,16 +30,18 @@ const initialContent = `
 `;
 
 function BlogCreatePage() {
-  const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('');
-  const [tags, setTags] = useState([]);
-  const [slug, setSlug] = useState('');
-  const [author, setAuthor] = useState('');
-  const [metaDescription, setMetaDescription] = useState('');
-  const [ogTitle, setOgTitle] = useState('');
-  const [ogDescription, setOgDescription] = useState('');
+  const [blogPost, setBlogPost] = useState<BlogPost>({
+    title: '',
+    category: '',
+    tags: [],
+    slug: '',
+    author: '',
+    metaDescription: '',
+    ogTitle: '',
+    ogDescription: '',
+    content: initialContent,
+  });
   const [previewMode, setPreviewMode] = useState(false);
-  const [content, setContent] = useState(initialContent);
 
   const editor = useEditor({
     extensions: [
@@ -40,24 +55,13 @@ function BlogCreatePage() {
     ],
     content: initialContent,
     onUpdate: ({ editor }) => {
-      // Capture the updated content in real-time
-      setContent(editor.getHTML());
+      setBlogPost((prev) => ({ ...prev, content: editor.getHTML() }));
     },
   });
 
   const handleSave = () => {
-    console.log('Saved blog post:', {
-      title,
-      category,
-      tags,
-      slug,
-      author,
-      metaDescription,
-      ogTitle,
-      ogDescription,
-      content,
-    });
-    // Implement save logic (e.g., save to a server or local state)
+    console.log('Saved blog post:', blogPost);
+    // Implement save logic here
   };
 
   return (
@@ -67,126 +71,101 @@ function BlogCreatePage() {
       <Grid gutter="lg" style={{ width: '80vw' }}>
         {/* Left Grid.Column: Blog Form and Editor */}
         <Grid.Col span={previewMode ? 6 : 12}>
-          
-        <Fieldset legend="Blog Information">
-        <Stack spacing="md">
-          {/* Title */}
-          <TextInput
-            label="Blog Title"
-            placeholder="Enter the title of your blog"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-     
-          />
+          <Fieldset legend="Blog Information">
+            <Stack gap="md">
+              {/* Title */}
+              <TextInput
+                label="Blog Title"
+                placeholder="Enter the title of your blog"
+                value={blogPost.title}
+                onChange={(e) => setBlogPost((prev) => ({ ...prev, title: e.target.value }))}
+              />
 
-          {/* Slug */}
-          <TextInput
-            label="Slug"
-            placeholder="Enter a slug for the blog"
-            value={slug}
-            onChange={(e) => setSlug(e.target.value)}
-        
-          />
+              {/* Slug */}
+              <TextInput
+                label="Slug"
+                placeholder="Enter a slug for the blog"
+                value={blogPost.slug}
+                onChange={(e) => setBlogPost((prev) => ({ ...prev, slug: e.target.value }))}
+              />
 
-          {/* Category */}
-          <TextInput
-            label="Category"
-            placeholder="Enter a category for your blog"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-      
-          />
+              {/* Category */}
+              <TextInput
+                label="Category"
+                placeholder="Enter a category for your blog"
+                value={blogPost.category}
+                onChange={(e) => setBlogPost((prev) => ({ ...prev, category: e.target.value }))}
+              />
 
-          {/* Author */}
-          <TextInput
-            label="Author"
-            placeholder="Enter the author's name"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-        
-          />
+              {/* Author */}
+              <TextInput
+                label="Author"
+                placeholder="Enter the author's name"
+                value={blogPost.author}
+                onChange={(e) => setBlogPost((prev) => ({ ...prev, author: e.target.value }))}
+              />
 
-          {/* Content */}
-          <TextInput
-            label="Content"
-            placeholder="Write your content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-           
-          />
 
-      
+              {/* Rich Text Editor for content */}
+              <div style={{ marginTop: '30px' }}>
+              <RichTextEditor editor={editor}>
+                  <RichTextEditor.Toolbar sticky stickyOffset={60}>
+                    <RichTextEditor.ControlsGroup>
+                      <RichTextEditor.Bold />
+                      <RichTextEditor.Italic />
+                      <RichTextEditor.Underline />
+                      <RichTextEditor.Strikethrough />
+                      <RichTextEditor.ClearFormatting />
+                      <RichTextEditor.Highlight />
+                      <RichTextEditor.Code />
+                    </RichTextEditor.ControlsGroup>
+                  {/* Toolbar contents */}
+                </RichTextEditor.Toolbar>
+                <RichTextEditor.Content /> {/* Content needs to be within RichTextEditor */}
+                </RichTextEditor>
+              </div>
 
-          {/* Rich Text Editor for content */}
-          <div style={{ marginTop: '30px' }}>
-            <RichTextEditor editor={editor}>
-              <RichTextEditor.Toolbar sticky stickyOffset={60}>
-                <RichTextEditor.ControlsGroup>
-                  <RichTextEditor.Bold />
-                  <RichTextEditor.Italic />
-                  <RichTextEditor.Underline />
-                  <RichTextEditor.Strikethrough />
-                  <RichTextEditor.ClearFormatting />
-                  <RichTextEditor.Highlight />
-                  <RichTextEditor.Code />
-                </RichTextEditor.ControlsGroup>
+              {/* Meta Description */}
+              <Textarea
+                label="Meta Description"
+                placeholder="Enter meta description"
+                value={blogPost.metaDescription}
+                onChange={(e) => setBlogPost((prev) => ({ ...prev, metaDescription: e.target.value }))}
+              />
 
-                <RichTextEditor.ControlsGroup>
-                  <RichTextEditor.H1 />
-                  <RichTextEditor.H2 />
-                  <RichTextEditor.H3 />
-                  <RichTextEditor.H4 />
-                </RichTextEditor.ControlsGroup>
+              {/* Open Graph Title */}
+              <TextInput
+                label="Open Graph Title"
+                placeholder="Enter Open Graph title"
+                value={blogPost.ogTitle}
+                onChange={(e) => setBlogPost((prev) => ({ ...prev, ogTitle: e.target.value }))}
+              />
 
-                <RichTextEditor.ControlsGroup>
-                  <RichTextEditor.Blockquote />
-                  <RichTextEditor.Hr />
-                  <RichTextEditor.BulletList />
-                  <RichTextEditor.OrderedList />
-                  <RichTextEditor.Subscript />
-                  <RichTextEditor.Superscript />
-                </RichTextEditor.ControlsGroup>
-
-                <RichTextEditor.ControlsGroup>
-                  <RichTextEditor.Link />
-                  <RichTextEditor.Unlink />
-                </RichTextEditor.ControlsGroup>
-
-                <RichTextEditor.ControlsGroup>
-                  <RichTextEditor.AlignLeft />
-                  <RichTextEditor.AlignCenter />
-                  <RichTextEditor.AlignJustify />
-                  <RichTextEditor.AlignRight />
-                </RichTextEditor.ControlsGroup>
-
-                <RichTextEditor.ControlsGroup>
-                  <RichTextEditor.Undo />
-                  <RichTextEditor.Redo />
-                </RichTextEditor.ControlsGroup>
-              </RichTextEditor.Toolbar>
-
-              <RichTextEditor.Content />
-            </RichTextEditor>
-          </div>
-
+              {/* Open Graph Description */}
+              <Textarea
+                label="Open Graph Description"
+                placeholder="Enter Open Graph description"
+                value={blogPost.ogDescription}
+                onChange={(e) => setBlogPost((prev) => ({ ...prev, ogDescription: e.target.value }))}
+              />
               {/* Save Button */}
               <Button onClick={handleSave}>Save Post</Button>
-        </Stack>
-      </Fieldset>
+            </Stack>
+          </Fieldset>
         </Grid.Col>
 
         {/* Right Grid.Column: Preview Section */}
         {previewMode && (
           <Grid.Col span={6}>
-            <Paper padding="lg" shadow="xs" style={{ height: '100%' }}>
-              <h2>{title || 'Blog Title'}</h2>
-              <p><strong>Category:</strong> {category}</p>
-              <p><strong>Author:</strong> {author}</p>
-              <p><strong>Tags:</strong> {tags.join(', ')}</p>
-              <div dangerouslySetInnerHTML={{ __html: content }} />
-              <p><strong>Meta Description:</strong> {metaDescription}</p>
-              <p><strong>Open Graph Title:</strong> {ogTitle}</p>
-              <p><strong>Open Graph Description:</strong> {ogDescription}</p>
+            <Paper shadow="xs" style={{ height: '100%', padding: 'lg' }}>
+              <h2>{blogPost.title || 'Blog Title'}</h2>
+              <p><strong>Category:</strong> {blogPost.category}</p>
+              <p><strong>Author:</strong> {blogPost.author}</p>
+              <p><strong>Tags:</strong> {blogPost.tags.join(', ')}</p>
+              <div dangerouslySetInnerHTML={{ __html: blogPost.content }} />
+              <p><strong>Meta Description:</strong> {blogPost.metaDescription}</p>
+              <p><strong>Open Graph Title:</strong> {blogPost.ogTitle}</p>
+              <p><strong>Open Graph Description:</strong> {blogPost.ogDescription}</p>
             </Paper>
           </Grid.Col>
         )}
